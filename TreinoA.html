@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treino A</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .top-bar button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .top-bar button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .top-bar button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .exercise-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+        }
+
+        .exercise {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .exercise h2 {
+            font-size: 18px;
+            margin: 0;
+            text-align: center;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .buttons button.active {
+            background-color: green;
+            color: white;
+        }
+
+        .buttons button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .buttons button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .rest {
+            color: red;
+            text-align: center;
+            white-space: nowrap;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #cronometro {
+            padding: 20px 40px;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        #cronometro:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #cronometro:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .exercise-container {
+                width: 100%;
+                padding: 10px;
+            }
+            .exercise h2 {
+                font-size: 16px;
+            }
+            .buttons button, #cronometro {
+                padding: 16px 32px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 414px) {
+            .top-bar button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .exercise h2 {
+                font-size: 14px;
+            }
+            .buttons button, #cronometro {
+                padding: 12px 24px;
+                font-size: 18px;
+            }
+        }
+    </style>
+    <script>
+        function toggleActive(button) {
+            button.classList.toggle('active');
+        }
+
+        let interval;
+        function startTimer(button) {
+            clearInterval(interval);
+            let time = 120; // 2 minutos em segundos
+            button.classList.add('active');
+            button.disabled = true;
+            interval = setInterval(() => {
+                let minutes = Math.floor(time / 60);
+                let seconds = time % 60;
+                button.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                if (time === 0) {
+                    clearInterval(interval);
+                    button.classList.remove('active');
+                    button.textContent = "02:00";
+                    button.disabled = false;
+                    tocarAlarme();
+                }
+                time--;
+            }, 1000);
+        }
+
+        function tocarAlarme() {
+            const contextoAudio = new (window.AudioContext || window.webkitAudioContext)();
+
+            let repetir = 6; // Número de vezes que o som tocará (6 * 300ms = 1.8 segundos)
+            let intervalo = 300; // Intervalo de cada beep (300ms)
+
+            function tocarSom(vezesRestantes) {
+                if (vezesRestantes <= 0) return;
+
+                const osc = contextoAudio.createOscillator();
+                const gainNode = contextoAudio.createGain();
+
+                osc.connect(gainNode);
+                gainNode.connect(contextoAudio.destination);
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(1000, contextoAudio.currentTime);
+                osc.start();
+
+                setTimeout(() => {
+                    osc.stop();
+                    setTimeout(() => {
+                        tocarSom(vezesRestantes - 1);
+                    }, intervalo);
+                }, intervalo);
+            }
+
+            tocarSom(repetir);
+        }
+
+        function toggleDay(button) {
+            const exerciseText = document.getElementById('exerciseText');
+            if (button.textContent === 'SEGUNDA') {
+                button.textContent = 'QUINTA';
+                exerciseText.textContent = 'Tríceps Testa 4 séries até a F';
+            } else {
+                button.textContent = 'SEGUNDA';
+                exerciseText.textContent = 'Afunda Tríceps 4 séries até a F';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="top-bar">
+        <button onclick="location.href='index.html'">Voltar</button>
+        <button onclick="toggleDay(this)">SEGUNDA</button>
+    </div>
+    <h1>Treino A</h1>
+    <div class="exercise-container">
+        <div class="exercise">
+            <h2>Flexão Aberta Inclinada 4 séries até a F</h2>
+            <div class="buttons">
+                <button onclick="toggleActive(this)">1</button>
+                <button onclick="toggleActive(this)">2</button>
+                <button onclick="toggleActive(this)">3</button>
+                <button onclick="toggleActive(this)">4</button>
+            </div>
+        </div>
+        <div class="exercise">
+            <h2 class="rest">2 min descanso entre cada série</h2>
+        </div>
+        <div class="exercise">
+            <h2>Flexão Diamante 4 séries até a F</h2>
+            <div class="buttons">
+                <button onclick="toggleActive(this)">1</button>
+                <button onclick="toggleActive(this)">2</button>
+                <button onclick="toggleActive(this)">3</button>
+                <button onclick="toggleActive(this)">4</button>
+            </div>
+        </div>
+        <div class="exercise">
+            <h2 class="rest">2 min descanso entre cada série</h2>
+        </div>
+        <div class="exercise">
+            <h2>Flexão Aberta Declinada 4 séries até a F</h2>
+            <div class="buttons">
+                <button onclick="toggleActive(this)">1</button>
+                <button onclick="toggleActive(this)">2</button>
+                <button onclick="toggleActive(this)">3</button>
+                <button onclick="toggleActive(this)">4</button>
+            </div>
+        </div>
+        <div class="exercise">
+            <h2 class="rest">2 min descanso entre cada série</h2>
+        </div>
+        <div class="exercise">
+            <h2 id="exerciseText">Afunda Tríceps 4 séries até a F</h2>
+            <div class="buttons">
+                <button onclick="toggleActive(this)">1</button>
+                <button onclick="toggleActive(this)">2</button>
+                <button onclick="toggleActive(this)">3</button>
+                <button onclick="toggleActive(this)">4</button>
+            </div>
+        </div>
+        <button id="cronometro" onclick="startTimer(this)">02:00</button>
+    </div>
+</body>
+</html>
