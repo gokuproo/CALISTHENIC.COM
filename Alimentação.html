@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALIMENTAÇÃO</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1, h2 {
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            word-wrap: break-word;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: clamp(24px, 5vw, 32px);
+            color: black;
+        }
+
+        h2 {
+            margin: 10px 0;
+            font-size: clamp(18px, 4vw, 24px);
+            color: red;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .top-bar button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .top-bar button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .top-bar button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <button onclick="location.href='index.html'">Voltar</button>
+    </div>
+    <h1>Café da manhã</h1>
+    <h2>2/3 pães de padeiro | 4 pães caseiros</h2>
+    <h2>400ml de leite</h2>
+    <h2>1 fruta se tiver</h2>
+
+    <h1>Almoço</h1>
+    <h2>10 colheres de arroz | 100g de arroz</h2>
+    <h2>10 colheres de feijão | 200g de feijão</h2>
+    <h2>5 colheres de macarrão | 100g de macarrão</h2>
+    <h2>6 pedaços de carne</h2>
+
+    <h1>Café da tarde</h1>
+    <h2>2/3 pães de padeiro | 4 pães caseiros</h2>
+    <h2>400ml de leite</h2>
+    <h2>1 fruta se tiver</h2>
+
+    <h1>Janta</h1>
+    <h2>10 colheres de arroz | 100g de arroz</h2>
+    <h2>10 colheres de feijão | 200g de feijão</h2>
+    <h2>5 colheres de macarrão | 100g de macarrão</h2>
+    <h2>6 pedaços de carne</h2>
+</body>
+</html>
